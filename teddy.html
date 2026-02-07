@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Message 🌹</title>
+<style>
+body{
+  margin:0; padding:0; font-family:'Quicksand',sans-serif;
+  min-height:100vh; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background: linear-gradient(to bottom,#fff0f5,#ffe6f0);
+  animation: bgAnim 12s ease-in-out infinite alternate;
+}
+@keyframes bgAnim{
+  0%{background: linear-gradient(to bottom,#fff0f5,#ffe6f0);}
+  50%{background: linear-gradient(to bottom,#ffe6f0,#ffd1e6);}
+  100%{background: linear-gradient(to bottom,#fff0f5,#ffe6f0);}
+}
+
+h1{
+  font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; margin-top:40px;
+}
+.teddy-container{
+  position:relative; width:300px; margin-top:30px;
+  animation: float 3s ease-in-out infinite alternate;
+}
+.teddy-container img{width:100%;}
+.message{
+  max-width:650px; font-size:20px; text-align:center; color:#990033;
+  margin:30px 20px; line-height:1.6; min-height:200px;
+}
+/* Floating flowers/hearts */
+.flower{
+  position:fixed; top:-50px; font-size:24px; pointer-events:none; user-select:none;
+}
+/* Teddy float animation */
+@keyframes float{
+  0%{transform: translateY(0px);}
+  100%{transform: translateY(-15px);}
+}
+</style>
+</head>
+<body>
+
+<h1>Just For You 🌹</h1>
+<div class="teddy-container">
+  <img src="teddy.gif" alt="Teddy giving rose">
+</div>
+
+<div class="message" id="loveMessage"></div>
+
+<script>
+// ======= Letter-by-letter long message =======
+const fullMessage = `My dearest Melu,
+
+Even though we are apart today, I want you to know that my heart is always with you.  
+Every smile, every laugh, every little moment we’ve shared is a treasure I carry with me.  
+
+I wish I could hold you close and give you this rose in person.  
+Distance may separate us, but our love grows stronger every day.  
+
+You are my happiness, my joy, my everything.  
+Thank you for being my partner, my best friend, and my love.  
+
+Happy Rose Day ❤️🌹`;
+
+const msgEl = document.getElementById('loveMessage');
+let idx = 0;
+
+function typeWriter(){
+  if(idx < fullMessage.length){
+    msgEl.innerHTML += fullMessage.charAt(idx).replace(/\n/g,'<br>'); // preserves line breaks
+    idx++;
+    setTimeout(typeWriter, 35); // adjust speed
+  }
+}
+typeWriter();
+
+// ======= Falling/swirl flowers & hearts =======
+function createFlowers(){
+  for(let i=0;i<50;i++){spawnFlower();}
+  setInterval(spawnFlower,400);
+}
+
+function spawnFlower(){
+  const f = document.createElement('div');
+  f.className='flower';
+  f.textContent = Math.random() > 0.5 ? '🌸' : '❤️';
+  f.style.left = Math.random()*100+'vw';
+  f.style.fontSize = 15 + Math.random()*25 + 'px';
+  f.style.opacity = 0.5 + Math.random()*0.5;
+
+  const duration = 4 + Math.random()*6;
+  const rotate = Math.random()*360;
+
+  // Trigger animation with JS transform
+  f.style.transition = `transform ${duration}s linear`;
+  document.body.appendChild(f);
+
+  requestAnimationFrame(()=>{
+    f.style.transform = `translateY(110vh) rotate(${rotate}deg)`;
+  });
+
+  // Remove after animation
+  setTimeout(()=>f.remove(), duration*1000);
+}
+
+createFlowers();
+</script>
+
+</body>
+</html>
