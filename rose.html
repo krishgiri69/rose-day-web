@@ -16,23 +16,18 @@ body{
   50% {background: linear-gradient(to right,#ffd1e6,#ffe6f0);}
   100% {background: linear-gradient(to right,#ffccdd,#ffe6f0);}
 }
-
 h1{font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; text-align:center; margin-bottom:20px;}
-
 .rose-container{
   border:5px solid #ff99c8; border-radius:20px; padding:10px;
   background:#fff0f5; box-shadow:0 0 20px rgba(255,102,178,0.3); margin-bottom:40px;
 }
 .rose-container img{width:300px;border-radius:15px;}
-
 button{
   padding:16px 30px;font-size:18px;border:none;border-radius:25px;
   background:linear-gradient(45deg,#ff4d94,#ff80b3); color:white;
   cursor:pointer; box-shadow:0 0 20px #ff80b3; transition: transform 0.2s;
 }
 button:hover{transform:scale(1.1); box-shadow:0 0 30px #ff99c8;}
-
-/* Falling petals/hearts */
 .flower{
   position:fixed; top:-50px; font-size:24px; pointer-events:none; user-select:none;
 }
@@ -49,9 +44,8 @@ button:hover{transform:scale(1.1); box-shadow:0 0 30px #ff99c8;}
 <button id="goTeddyBtn">See Your Surprise 🎁</button>
 
 <script>
-// Button to go to Teddy page
-const goTeddyBtn = document.getElementById('goTeddyBtn');
-goTeddyBtn.addEventListener('click', () => {
+// Navigate to Teddy page
+document.getElementById('goTeddyBtn').addEventListener('click', () => {
     window.location.href = 'teddy.html';
 });
 
@@ -87,4 +81,3 @@ createFlowers();
 
 </body>
 </html>
-
