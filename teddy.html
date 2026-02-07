@@ -49,9 +49,11 @@ h1{
 
 <div class="message" id="loveMessage"></div>
 
+<audio id="song" src="yoursong.mp3"></audio>
+
 <script>
 // ======= Letter-by-letter long message =======
-const fullMessage = `My dearest Melu,
+const fullMessage = `My dearest love,
 
 Even though we are apart today, I want you to know that my heart is always with you.  
 Every smile, every laugh, every little moment we’ve shared is a treasure I carry with me.  
@@ -69,9 +71,9 @@ let idx = 0;
 
 function typeWriter(){
   if(idx < fullMessage.length){
-    msgEl.innerHTML += fullMessage.charAt(idx).replace(/\n/g,'<br>'); // preserves line breaks
+    msgEl.innerHTML += fullMessage.charAt(idx).replace(/\n/g,'<br>');
     idx++;
-    setTimeout(typeWriter, 35); // adjust speed
+    setTimeout(typeWriter, 35);
   }
 }
 typeWriter();
@@ -93,7 +95,6 @@ function spawnFlower(){
   const duration = 4 + Math.random()*6;
   const rotate = Math.random()*360;
 
-  // Trigger animation with JS transform
   f.style.transition = `transform ${duration}s linear`;
   document.body.appendChild(f);
 
@@ -101,11 +102,17 @@ function spawnFlower(){
     f.style.transform = `translateY(110vh) rotate(${rotate}deg)`;
   });
 
-  // Remove after animation
   setTimeout(()=>f.remove(), duration*1000);
 }
 
 createFlowers();
+
+// ======= Play song automatically =======
+const song = document.getElementById('song');
+window.addEventListener('load', () => {
+    // Most browsers allow autoplay because user clicked the Yes button before
+    song.play().catch(err => console.log("Autoplay blocked, user interaction required", err));
+});
 </script>
 
 </body>
