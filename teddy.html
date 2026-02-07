@@ -16,10 +16,7 @@ body{
   50%{background: linear-gradient(to bottom,#ffe6f0,#ffd1e6);}
   100%{background: linear-gradient(to bottom,#fff0f5,#ffe6f0);}
 }
-
-h1{
-  font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; margin-top:40px;
-}
+h1{font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; margin-top:40px;}
 .teddy-container{
   position:relative; width:300px; margin-top:30px;
   animation: float 3s ease-in-out infinite alternate;
@@ -29,15 +26,19 @@ h1{
   max-width:650px; font-size:20px; text-align:center; color:#990033;
   margin:30px 20px; line-height:1.6; min-height:200px;
 }
-/* Floating flowers/hearts */
 .flower{
   position:fixed; top:-50px; font-size:24px; pointer-events:none; user-select:none;
 }
-/* Teddy float animation */
 @keyframes float{
   0%{transform: translateY(0px);}
   100%{transform: translateY(-15px);}
 }
+button{
+  padding:16px 30px;font-size:18px;border:none;border-radius:25px;
+  background:linear-gradient(45deg,#ff4d94,#ff80b3); color:white;
+  cursor:pointer; box-shadow:0 0 20px #ff80b3; transition: transform 0.2s;
+}
+button:hover{transform:scale(1.1); box-shadow:0 0 30px #ff99c8;}
 </style>
 </head>
 <body>
@@ -49,10 +50,21 @@ h1{
 
 <div class="message" id="loveMessage"></div>
 
+<button id="playSongBtn">Play Our Song 💗</button>
 <audio id="song" src="yoursong.mp3"></audio>
 
 <script>
-// ======= Letter-by-letter long message =======
+// ====== Play song on button click ======
+const songBtn = document.getElementById('playSongBtn');
+const song = document.getElementById('song');
+
+songBtn.addEventListener('click', async () => {
+    try { await song.play(); } 
+    catch(err){ console.log("Playback blocked", err); }
+    songBtn.style.display = 'none'; // hide button after click
+});
+
+// ====== Letter-by-letter long message ======
 const fullMessage = `My dearest love,
 
 Even though we are apart today, I want you to know that my heart is always with you.  
@@ -68,7 +80,6 @@ Happy Rose Day ❤️🌹`;
 
 const msgEl = document.getElementById('loveMessage');
 let idx = 0;
-
 function typeWriter(){
   if(idx < fullMessage.length){
     msgEl.innerHTML += fullMessage.charAt(idx).replace(/\n/g,'<br>');
@@ -78,7 +89,7 @@ function typeWriter(){
 }
 typeWriter();
 
-// ======= Falling/swirl flowers & hearts =======
+// ====== Falling/swirl flowers & hearts ======
 function createFlowers(){
   for(let i=0;i<50;i++){spawnFlower();}
   setInterval(spawnFlower,400);
@@ -106,13 +117,6 @@ function spawnFlower(){
 }
 
 createFlowers();
-
-// ======= Play song automatically =======
-const song = document.getElementById('song');
-window.addEventListener('load', () => {
-    // Most browsers allow autoplay because user clicked the Yes button before
-    song.play().catch(err => console.log("Autoplay blocked, user interaction required", err));
-});
 </script>
 
 </body>
