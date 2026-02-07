@@ -17,9 +17,7 @@ body{
   100% {background: linear-gradient(to right,#ffccdd,#ffe6f0);}
 }
 
-h1{
-  font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; text-align:center; margin-bottom:20px;
-}
+h1{font-family:'Dancing Script',cursive; font-size:3rem; color:#e60050; text-align:center; margin-bottom:20px;}
 
 .rose-container{
   border:5px solid #ff99c8; border-radius:20px; padding:10px;
@@ -48,30 +46,16 @@ button:hover{transform:scale(1.1); box-shadow:0 0 30px #ff99c8;}
 <img src="rose.jpg" alt="Rose">
 </div>
 
-<button id="playSongBtn">Play Our Song 💗</button>
-<audio id="song" src="yoursong.mp3"></audio>
+<button id="goTeddyBtn">See Your Surprise 🎁</button>
 
 <script>
-// ======== Play Song & Redirect ========
-const songBtn = document.getElementById('playSongBtn');
-const song = document.getElementById('song');
-
-songBtn.addEventListener('click', async () => {
-    try {
-        await song.play(); // ensures browser allows playback
-    } catch(err) {
-        console.log("Audio play blocked: ", err);
-    }
-    songBtn.disabled = true;
-    songBtn.style.cursor = 'default';
-
-    // Redirect after 1 second so song starts
-    setTimeout(() => {
-        window.location.href = 'teddy.html';
-    }, 1000);
+// Button to go to Teddy page
+const goTeddyBtn = document.getElementById('goTeddyBtn');
+goTeddyBtn.addEventListener('click', () => {
+    window.location.href = 'teddy.html';
 });
 
-// ======== Falling petals/hearts ========
+// Falling petals/hearts
 function createFlowers(){
   for(let i=0;i<40;i++){spawnFlower();}
   setInterval(spawnFlower,500);
@@ -88,7 +72,6 @@ function spawnFlower(){
   const duration = 4 + Math.random()*6;
   const rotate = Math.random()*360;
 
-  // Animate using JS
   f.style.transition = `transform ${duration}s linear`;
   document.body.appendChild(f);
 
@@ -96,7 +79,6 @@ function spawnFlower(){
     f.style.transform = `translateY(110vh) rotate(${rotate}deg)`;
   });
 
-  // Remove after animation
   setTimeout(()=>f.remove(), duration*1000);
 }
 
